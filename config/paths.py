@@ -64,3 +64,8 @@ class ProjectPaths:
 
         # DAS dataset
         self.DAS_OUELLET_2024 = self.DATA_DIR / 'DAS' / 'Ouellet_2024'
+
+        # MCM CR1000X data folder
+        self.MCM_CR1000X_DATA = self.DATA_DIR / 'MCM_CR1000X_Data'
+        self.MCM_CR1000X_CONV_PARAMS = self.DATA_DIR / 'MCM_CR1000X_params' / 'conversion_params.csv'
+        self.MCM_CR1000X_SENS_META = self.DATA_DIR / 'MCM_CR1000X_params' / 'sensors_metadata.csv'

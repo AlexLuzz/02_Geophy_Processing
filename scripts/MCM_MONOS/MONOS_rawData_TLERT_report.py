@@ -24,7 +24,7 @@ def process_ert_site(site_id, geom_path, source_paths, offset_elec=None):
         for source in source_paths:
             df = loader.load_prime(source=source, **load_kwargs)
 
-        temp_corr = True
+        temp_corr = False
         
         if temp_corr:
             t1, T1 = pd.Timestamp("2026-08-01 00:00"), 11
@@ -36,7 +36,7 @@ def process_ert_site(site_id, geom_path, source_paths, offset_elec=None):
             df["rhoa (Ohm.m)"] = df["rhoa (Ohm.m)"] * (
                 1 + 0.02 * (df["temp_model"] - 11))
 
-        rel = True
+        rel = False
 
         if rel:
             ref = pd.Timestamp("2026-08-01 00:00")
@@ -55,15 +55,15 @@ def process_ert_site(site_id, geom_path, source_paths, offset_elec=None):
              
         suffix = site_id.split('_')[-1] 
         RawDataReport.print(
-            filename=f"{today}_RawData_TLERT_{suffix}_relVar.pdf",
+            filename=f"{today}_RawData_TLERT_{suffix}.pdf",
             folder_path=report_path,
             df=df,
             elec_pos=geom,
-            max_groups=10
+            #max_groups=10
             )
 
 if __name__ == "__main__":
-    paths = ProjectPaths(user='AQ96560') 
+    paths = ProjectPaths(user='alexi') 
 
     report_path = paths.OUTPUT_DIR / "RAW_DATA_TLERT_MONOS" 
     report_path.parent.mkdir(parents=True, exist_ok=True)

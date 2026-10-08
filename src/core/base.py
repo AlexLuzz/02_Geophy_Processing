@@ -8,6 +8,7 @@ from pathlib import Path
 from datetime import datetime
 
 from src.mesh.pygimli_mesh_tools import safe_mesh_load, safe_mesh_save
+from src.loaders.loading_tools import resolve_files
 
 class MemoryHandler(logging.Handler):
     def __init__(self):
@@ -37,6 +38,9 @@ class ProjectBase:
         logger.setLevel(logging.INFO)
         logger.propagate = False
         return logger
+
+    def _resolve_files(self, source: Path | str | list, pattern: str = "*") -> list[Path]:
+        return resolve_files(source, pattern)
     
     def load(self, file_path: Path | str) -> any:
         file_path = Path(file_path)
