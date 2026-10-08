@@ -38,21 +38,23 @@ def get_excluded_configs_mask(df, excluded_configs, config_cols=['A', 'B', 'M', 
         mask &= ~config_match
     return mask
 
-def get_hampel_mask(df, target_col, window_size=3, n_sigma=3.0, config_cols=['A', 'B', 'M', 'N']):
-    """
-    Vectorized Hampel filter. Returns False for outliers detected within the rolling window.
-    Groups by configuration to avoid mixing different time-series.
-    """
-    def _is_outlier(s):
-        rolling = s.rolling(window=window_size, center=True)
-        median = rolling.median()
-        # MAD: Median Absolute Deviation
-        mad = rolling.apply(lambda x: np.median(np.abs(x - np.median(x))), raw=True)
-        threshold = n_sigma * 1.4826 * mad
-        return np.abs(s - median) > threshold
+def get_hampel_mask(s, window_size=3, n_sigma=3.0):
+    r = s.rolling(window_size, center=True)
+    med = r.median()
+    mad = r.apply(lambda x: np.median(np.abs(x - np.median(x))), raw=True)
+    return ~(np.abs(s - med) > n_sigma * 1.4826 * mad).fillna(False)
 
-    outliers = df.groupby(config_cols, group_keys=False)[target_col].apply(_is_outlier)
-    return ~outliers.fillna(False).astype(bool)
+def apply_hampel_filter(df, target_col = None, window_size=3, n_sigma=3.0):
+    df = df.copy()
+    mask = get_hampel_mask(df[target_col] if target_col in df.columns else df.iloc[:, 0], window_size, n_sigma)
+    df.loc[~mask, target_col] = np.nan
+    return df
+
+def get_hampel_mask_ert(df, target_col, window_size=3, n_sigma=3.0,
+                        config_cols=['A', 'B', 'M', 'N']):
+    return df.groupby(config_cols, group_keys=False)[target_col].apply(
+        lambda s: get_hampel_mask(s, window_size, n_sigma)
+    )
 
 def get_discontinued_configs_mask(df, min_length=100, config_cols=['A', 'B', 'M', 'N']):
     """Returns False for electrode configurations that have fewer total measurements than min_length."""

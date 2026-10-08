@@ -67,5 +67,6 @@ class ProjectPaths:
 
         # MCM CR1000X data folder
         self.MCM_CR1000X_DATA = self.DATA_DIR / 'MCM_CR1000X_Data'
-        self.MCM_CR1000X_CONV_PARAMS = self.DATA_DIR / 'MCM_CR1000X_params' / 'conversion_params.csv'
-        self.MCM_CR1000X_SENS_META = self.DATA_DIR / 'MCM_CR1000X_params' / 'sensors_metadata.csv'
+        self.MCM_CR1000X_CS616_CAL_WSP = self.DATA_DIR / 'MCM_CR1000X_params' / 'CS616_calibration_WSP.json'
+        self.MCM_CR1000X_CS616_CAL_OKANE = self.DATA_DIR / 'MCM_CR1000X_params' / 'CS616_calibration_Okane.json'
+        self.MCM_CR1000X_1A_STATIONS_META = self.DATA_DIR / 'MCM_CR1000X_params' / '1A_Stations_metadata.json'
