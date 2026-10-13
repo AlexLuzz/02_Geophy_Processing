@@ -8,7 +8,7 @@ import numpy as np
 
 from pygimli.meshtools import readGmsh
 
-from src.visualization.basic_plotting import plot_array_on_mesh, extract_polygons, plot_electrodes
+from src.visualization.basic_plotting import plot_array_on_mesh, extract_polygons, plot_sensors
 import matplotlib.pyplot as plt
 from src.loaders.ert_loading_tools import load_geometry
 from config.paths import ProjectPaths
@@ -190,7 +190,7 @@ def test_build_MCM_M2m():
     fig, ax = plt.subplots(figsize=(10, 5))
     ax, coll = plot_array_on_mesh(mesh_polygons, array=markers, ax=ax, cmap='viridis', edgecolor='black', alpha=0.5)
     
-    plot_electrodes(geom_mono2m, ax)
+    plot_sensors(geom_mono2m, ax)
     
     # Save it safely
     # mesh_path_str = str(paths.OUTPUT_DIR / 'MCM_MONO2M_Layered.bms').replace('\\', '/')

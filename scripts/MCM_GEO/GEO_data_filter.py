@@ -2,7 +2,7 @@ from config.paths import ProjectPaths
 from src.loaders.ert_loading_tools import load_geometry
 from src.mesh.gmesh_tools import *
 from src.loaders.ert_loader import ERTLoader
-from src.visualization.single_filtrated_report import FiltratedDataReport
+from src.visualization.ERT.single_filtrated_report import FiltratedDataReport
 from src.processing.data.data_preparator import DataPreparator
 
 from datetime import datetime

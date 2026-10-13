@@ -1,7 +1,7 @@
 import pandas as pd
 from pathlib import Path
 from src.visualization.report_base import ReportBase
-from src.visualization.basic_plotting import format_time_axis, plot_electrodes
+from src.visualization.basic_plotting import format_time_axis, plot_sensors
 from src.loaders.weather_loading_tools import fetch_weather_data
 
 class RawDataReport(ReportBase):
@@ -88,10 +88,10 @@ class RawDataReport(ReportBase):
                     ax.tick_params(labelbottom=False) 
 
                     # --- Geometry ---
-                    plot_electrodes(self.elec_pos, ax=ax_geom)
-                    plot_electrodes(self.elec_pos.iloc[[a - 1, b - 1]],
+                    plot_sensors(self.elec_pos, ax=ax_geom)
+                    plot_sensors(self.elec_pos.iloc[[a - 1, b - 1]],
                                     ax=ax_geom, color='red')
-                    plot_electrodes(self.elec_pos.iloc[[m - 1, n - 1]],
+                    plot_sensors(self.elec_pos.iloc[[m - 1, n - 1]],
                                     ax=ax_geom, color='blue')
                     
                     # Add electrode configuration text rectangle

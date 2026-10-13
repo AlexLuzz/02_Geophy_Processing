@@ -29,7 +29,7 @@
     - [x] 2026-09-01 : Check recip computation with Prime and SAS4000 is okay (tested with MCM GEO and 0901 Prime survey command file 9011)
     - [x] 2026-08-31 : Correct electrode ordering 
     - [x] 2026-08-30 : working, ensemble is running, need to improve saving logic
-    - [x] 2026-08-30 : Improve plot_electrodes func (so it can receive colors and stuff)
+    - [x] 2026-08-30 : Improve plot_sensors func (so it can receive colors and stuff)
     - [x] 2026-08-27 : Identify recip and measurement type for filtering / plotting purpose, funcs are in 
     loading_tools and implemented in the finalize_standardization step
     - [x] 2026-08-27 : Improved logic concerning load_geometry through the ERTLoader

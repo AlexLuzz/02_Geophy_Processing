@@ -1,3 +1,5 @@
+import re
+
 import pandas as pd
 from pathlib import Path
 from src.loaders.ert_loading_tools import *
@@ -35,46 +37,59 @@ class SensorLoader(ProjectBase):
         files = self._resolve_files(source, pattern)
         if not files:
             raise FileNotFoundError(f"No files matching '{pattern}' found in {source}")
-            
+
         for filepath in files:
-            self.logger.info(f"Loading CR1000X file: {filepath.name}")
+            station = re.search(r"\d[AB]_(?:SL|PL)_[PS]\d?", filepath.name)
+            if not station:
+                raise FileNotFoundError(f"Couldn't extract station name from '{filepath.name}'")
 
-            # header is set after skiprow, in raw file 1st raw is metadata, 2nd row is column names, 3rd row is units and 4th is Smp
-            df = pd.read_csv(filepath, sep=',', header=0, skiprows=[0, 2, 3], low_memory=False)
+            df = pd.read_csv(filepath, sep=",", skiprows=[0, 2, 3], low_memory=False)
+            df["TIMESTAMP"] = pd.to_datetime(df["TIMESTAMP"], errors="coerce")
+            df = df[df["TIMESTAMP"] >= pd.Timestamp("2020-01-01")] # Filter data befire 2020-01-01
+            cols = df.columns.difference(["TIMESTAMP"])
+            df[cols] = df[cols].apply(pd.to_numeric, errors="coerce")
 
-            station_name = filepath.name[-12:-4] 
-            df['TIMESTAMP'] = pd.to_datetime(df['TIMESTAMP'], format="%Y-%m-%d %H:%M:%S", errors='coerce')
-            cols = df.columns.difference(['TIMESTAMP'])
-            df[cols] = df[cols].apply(pd.to_numeric, errors='coerce')
+            name = station.group()
+            self.file_dict[name] = (
+                pd.concat([self.file_dict.get(name, pd.DataFrame()), df])
+                .dropna(subset=["TIMESTAMP"])
+                .drop_duplicates("TIMESTAMP", keep="last")
+                .sort_values("TIMESTAMP")
+                .reset_index(drop=True)
+            )
 
-            self.file_dict[station_name] = df
-            
         return self.file_dict
 
-    def compute_vwc_CS616(self, station_name: str) -> pd.DataFrame:
-        df = self.file_dict[station_name]
+    def compute_vwc_CS616(self, station_name: str = None) -> pd.DataFrame:
+        if station_name is None:
+            station_names = list(self.file_dict.keys())
+        else:
+            station_names = [station_name]
 
-        cols_VWC = [col for col in df.columns if 'Wat_Con_616' in col]
-        cols_Temp = [col for col in df.columns if 'SoilTemp' in col]
-        for i, (col_vwc, col_temp) in enumerate(zip(cols_VWC, cols_Temp)):
-            soil_type = self.sensor_meta[station_name]["CS616"]["soil_types"][i]
-            sensor_depth = self.sensor_meta[station_name]["CS616"]["depths"][i]
-            p = self.conv_params[soil_type]
+        for station in station_names:    
+            df = self.file_dict[station]
 
-            tau_m = df[col_vwc]
-            T_sol = df[col_temp]
+            cols_VWC = [col for col in df.columns if 'Wat_Con_616' in col]
+            cols_Temp = [col for col in df.columns if 'SoilTemp' in col]
+            for i, (col_vwc, col_temp) in enumerate(zip(cols_VWC, cols_Temp)):
+                soil_type = self.sensor_meta[station]["CS616"]["soil_types"][i]
+                sensor_depth = self.sensor_meta[station]["CS616"]["depths"][i]
+                p = self.conv_params[soil_type]
 
-            # Apply time period measurement correction using measured temperature
-            # tau_corr(tau_m, T_sol) = tau_m + (20 - T_sol)*(0.526 - 0.052 * tau_m + 0.00136 * tau_m**2) 
-            tau_corr = tau_m + (20 - T_sol) * (0.526 - 0.052 * tau_m + 0.00136 * tau_m**2)
-            
-            vwc = (p["c1"] * tau_corr + p["c0"]) ** 2
+                tau_m = df[col_vwc]
+                T_sol = df[col_temp]
 
-            # Delete vwc values that are outside the valid range (0-0.6 m3/m3)
-            vwc = np.clip(vwc, 0, 0.5)
+                # Apply time period measurement correction using measured temperature
+                # tau_corr(tau_m, T_sol) = tau_m + (20 - T_sol)*(0.526 - 0.052 * tau_m + 0.00136 * tau_m**2) 
+                tau_corr = tau_m + (20 - T_sol) * (0.526 - 0.052 * tau_m + 0.00136 * tau_m**2)
+                
+                vwc = (p["c1"] * tau_corr + p["c0"]) ** 2
 
-            vwc = filter_vwc(vwc)
+                # Delete vwc values that are outside the valid range (0-0.7 m3/m3)
+                vwc = np.clip(vwc, 0, 0.7)
 
-            df["VWC" + f"_{sensor_depth}"] = vwc
+                vwc = filter_vwc(vwc)
+
+                df["VWC" + f"_{sensor_depth}"] = vwc
         
-        return df
+        return self.file_dict

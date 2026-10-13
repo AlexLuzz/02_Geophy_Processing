@@ -8,7 +8,7 @@ import numpy as np
 
 from pygimli.meshtools import readGmsh
 
-from src.visualization.basic_plotting import plot_array_on_mesh, extract_polygons, plot_electrodes
+from src.visualization.basic_plotting import plot_array_on_mesh, extract_polygons, plot_sensors
 import matplotlib.pyplot as plt
 from src.loaders.ert_loading_tools import load_geometry
 from config.paths import ProjectPaths
@@ -216,7 +216,7 @@ def build_MCM_GEO(show: bool = False):
         fig, ax = plt.subplots(figsize=(10, 5))
         ax, coll = plot_array_on_mesh(mesh_polygons, array=markers, ax=ax, cmap='viridis', edgecolor='black', alpha=0.5)
         
-        plot_electrodes(geom_geo, ax)
+        plot_sensors(geom_geo, ax)
         
         print(f"Mesh has {mesh_geo.cellCount()} cells and {mesh_geo.nodeCount()} nodes.")
         

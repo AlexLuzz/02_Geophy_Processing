@@ -199,7 +199,7 @@
 │   │   ├── basic_plotting.py
 │   │   │       └── def format_time_axis(ax)
 │   │   │           """Smart date locator with MM-dd format and 45-degree angle."""
-│   │   │       └── def plot_electrodes(df, ax, elec_numbers)
+│   │   │       └── def plot_sensors(df, ax, elec_numbers)
 │   │   │           """Plot selected electrodes on an existing axis."""
 │   │   │       └── def plot_weather_data(weather_df, start_date, end_date, ax)
 │   │   │       └── def extract_polygons(mesh)

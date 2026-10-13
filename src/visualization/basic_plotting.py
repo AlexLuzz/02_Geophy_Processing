@@ -5,20 +5,20 @@ from matplotlib.collections import LineCollection, PatchCollection
 import pandas as pd
 import numpy as np
 
-def format_time_axis(ax):
+def format_time_axis(ax, format='%m-%d', rotation=45):
     """Smart date locator with MM-dd format and 45-degree angle."""
     locator = mdates.AutoDateLocator(minticks=4, maxticks=12)
-    formatter = mdates.DateFormatter('%m-%d')
+    formatter = mdates.DateFormatter(format)
     
     ax.xaxis.set_major_locator(locator)
     ax.xaxis.set_major_formatter(formatter)
     
     # Rotate and align labels
     for label in ax.get_xticklabels():
-        label.set_rotation(45)
+        label.set_rotation(rotation)
         label.set_horizontalalignment('right')
 
-def plot_electrodes(df, ax, elec_numbers=None, **params):
+def plot_sensors(df, ax, elec_numbers=None, **params):
     """Plot selected electrodes on an existing axis."""
     show_numbers = params.pop("show_numbers", False)
     number_every = params.pop("number_every", 4)

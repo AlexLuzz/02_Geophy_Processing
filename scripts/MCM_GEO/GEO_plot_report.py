@@ -1,5 +1,5 @@
 from config.paths import ProjectPaths
-from src.visualization.inversion_data_report import InversionDataReport
+from src.visualization.ERT.inversion_data_report import InversionDataReport
 from src.loaders.ert_loading_tools import load_geometry
 
 def run_GEO():

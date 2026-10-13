@@ -440,7 +440,7 @@
 
 **Functions:**
 - `def format_time_axis(ax)` — *Smart date locator with MM-dd format and 45-degree angle.*
-- `def plot_electrodes(df, ax, elec_numbers)` — *Plot selected electrodes on an existing axis.*
+- `def plot_sensors(df, ax, elec_numbers)` — *Plot selected electrodes on an existing axis.*
 - `def plot_weather_data(weather_df, start_date, end_date, ax)`
 - `def extract_polygons(mesh)` — *Directly builds Matplotlib polygons from a PyGIMLi mesh.*
 - `def plot_array_on_mesh(polygons, array, ax)` — *Plot an array of values on a collection of polygons.*
@@ -758,7 +758,7 @@ src\processing\inversion\pygimli_tools.py
     F 72:0 get_common_configs - A (3)
     F 63:0 build_ert_containers_timeseries - A (2)
 src\visualization\basic_plotting.py
-    F 21:0 plot_electrodes - A (5)
+    F 21:0 plot_sensors - A (5)
     F 47:0 plot_weather_data - A (4)
     F 95:0 extract_polygons - A (3)
     F 104:0 plot_array_on_mesh - A (3)

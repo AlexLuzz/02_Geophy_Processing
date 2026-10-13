@@ -5,7 +5,7 @@ from scripts.MCM_MONOS.mesh_building.MONO_gmsh import build_gmsh_layered
 from src.mesh.gmesh_tools import *
 from src.processing.inversion.ert_processor import ERTProcessor
 from src.loaders.ert_loader import ERTLoader
-from src.visualization.inversion_data_report import InversionDataReport
+from src.visualization.ERT.inversion_data_report import InversionDataReport
 
 from datetime import datetime
 

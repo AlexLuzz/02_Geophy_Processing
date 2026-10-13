@@ -5,7 +5,7 @@ from src.mesh.pygimli_mesh_tools import *
 from src.mesh.gmesh_tools import *
 from src.processing.inversion.ert_processor import ERTProcessor
 from src.loaders.ert_loader import ERTLoader
-from src.visualization.inversion_data_report import InversionDataReport
+from src.visualization.ERT.inversion_data_report import InversionDataReport
 
 from src.visualization.basic_plotting import plot_array_on_mesh, extract_polygons
 import numpy as np
@@ -70,7 +70,7 @@ from src.mesh.pygimli_mesh_tools import *
 from src.mesh.gmesh_tools import *
 from src.processing.inversion.ert_processor import ERTProcessor
 from src.loaders.ert_loader import ERTLoader
-from src.visualization.inversion_data_report import InversionDataReport
+from src.visualization.ERT.inversion_data_report import InversionDataReport
 
 from src.visualization.basic_plotting import plot_array_on_mesh, extract_polygons
 import numpy as np

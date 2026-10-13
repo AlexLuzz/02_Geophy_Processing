@@ -1,6 +1,6 @@
 from config.paths import ProjectPaths
 from src.processing.inversion.ert_processor import ERTProcessor
-from src.visualization.inversion_data_report import InversionDataReport
+from src.visualization.ERT.inversion_data_report import InversionDataReport
 from datetime import datetime
 
 from GEO_gmsh import build_MCM_GEO

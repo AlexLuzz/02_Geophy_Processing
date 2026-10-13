@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt
 from src.mesh.gmesh_tools import build_gmsh_mesh 
-from src.visualization.basic_plotting import plot_array_on_mesh, extract_polygons, plot_electrodes
+from src.visualization.basic_plotting import plot_array_on_mesh, extract_polygons, plot_sensors
 from src.loaders.ert_loading_tools import load_geometry
 from config.paths import ProjectPaths
 from pygimli.meshtools import readGmsh
@@ -18,7 +18,7 @@ def test_build_MCM_GEO_gmsh():
     mesh = build_gmsh_mesh(bb_geom, out_path=paths.OUTPUT_DIR / "MCM_GEO_mesh")
     mesh_polygons = extract_polygons(mesh)
     ax, coll = plot_array_on_mesh(mesh_polygons, edgecolor='black', alpha=0.2)
-    plot_electrodes(bb_geom, ax)
+    plot_sensors(bb_geom, ax)
     print(f"MCM_GEO Mesh has {mesh.cellCount()} cells and {mesh.nodeCount()} nodes.")
 
 
@@ -44,7 +44,7 @@ def test_build_MCM_M2m_gmsh():
     
     mesh_polygons = extract_polygons(mesh)
     ax, coll = plot_array_on_mesh(mesh_polygons, edgecolor='black', alpha=0.2, top_offset=5.0)
-    plot_electrodes(bb_geom, ax)
+    plot_sensors(bb_geom, ax)
     print(f"MCM_M2m Mesh has {mesh.cellCount()} cells and {mesh.nodeCount()} nodes.")
 
 

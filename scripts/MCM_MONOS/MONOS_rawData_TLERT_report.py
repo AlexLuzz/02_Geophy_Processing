@@ -1,7 +1,7 @@
 from config.paths import ProjectPaths
 from src.loaders.ert_loader import ERTLoader
 from src.loaders.ert_loading_tools import load_geometry
-from src.visualization.raw_data_report import RawDataReport
+from src.visualization.ERT.raw_data_report import RawDataReport
 from datetime import datetime
 
 import pandas as pd

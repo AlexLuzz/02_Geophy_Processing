@@ -2,7 +2,7 @@ from config.paths import ProjectPaths
 from src.loaders.ert_loader import ERTLoader
 from src.loaders.ert_loading_tools import load_geometry
 from src.processing.data.data_preparator import DataPreparator
-from src.visualization.single_filtrated_report import FiltratedDataReport
+from src.visualization.ERT.single_filtrated_report import FiltratedDataReport
 
 if __name__ == "__main__":
     paths = ProjectPaths(user='AQ96560') 
@@ -35,7 +35,7 @@ if __name__ == "__main__":
     report_path.parent.mkdir(parents=True, exist_ok=True)
     
     FiltratedDataReport.print(
-        filepath=report_path,
+        folder_path=report_path,
         df_raw=single_df_raw,
         df_clean=single_df_clean,
         geom_df=geom,

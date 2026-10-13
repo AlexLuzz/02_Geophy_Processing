@@ -1,6 +1,4 @@
 from abc import ABC, abstractmethod
-import matplotlib
-#matplotlib.use('Agg')
 from matplotlib.backends.backend_pdf import PdfPages
 import matplotlib.pyplot as plt
 from pathlib import Path

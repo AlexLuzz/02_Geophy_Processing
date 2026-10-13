@@ -8,7 +8,7 @@ import json
 import matplotlib.ticker as ticker
 
 from src.visualization.report_base import ReportBase
-from src.visualization.basic_plotting import extract_polygons, plot_array_on_mesh, plot_electrodes
+from src.visualization.basic_plotting import extract_polygons, plot_array_on_mesh, plot_sensors
 
 from src.mesh.pygimli_mesh_tools import safe_mesh_load 
 
@@ -188,7 +188,7 @@ class InversionDataReport(ReportBase):
 
             ax_mesh = fig.add_subplot(gs[1, 0])
             plot_array_on_mesh(self.mesh_polygons, ax=ax_mesh, edgecolor='black', alpha=0.3, linewidth=0.1)
-            plot_electrodes(self.elec_pos, ax=ax_mesh, show_numbers=True, number_every=4)
+            plot_sensors(self.elec_pos, ax=ax_mesh, show_numbers=True, number_every=4)
             ax_mesh.set_title(f"Forward Mesh: {self.mesh.cellCount()} cells, {self.mesh.nodeCount()} nodes", fontsize=8)
             ax_mesh.set_ylim([self.mesh.yMin(), self.mesh.yMax() + 6])
 
@@ -215,7 +215,7 @@ class InversionDataReport(ReportBase):
                     r, c = divmod(plot_idx, cols)
                     ax = fig.add_subplot(gs[r, c])
                     ax, collection = plot_array_on_mesh(self.paradomain_polygons, array=data_array[i], ax=ax, cmap=cmap, norm=norm)
-                    plot_electrodes(self.elec_pos, ax=ax)
+                    plot_sensors(self.elec_pos, ax=ax)
 
                     time_str = str(self.times[i])
                     param_str = " | ".join([f"{k}: {v}" for k, v in self.params[i].items()]) if self.params[i] else ""
@@ -248,7 +248,7 @@ class InversionDataReport(ReportBase):
 
                     ax = fig.add_subplot(gs[row, 0])
                     ax, collection = plot_array_on_mesh(self.paradomain_polygons, array=data_array[i], ax=ax, cmap=cmap, norm=norm)
-                    plot_electrodes(self.elec_pos, ax=ax)
+                    plot_sensors(self.elec_pos, ax=ax)
 
                     time_str = str(self.times[i])
                     param_str = " | ".join(f"{k}: {v}" for k, v in self.params[i].items())
@@ -262,7 +262,7 @@ class InversionDataReport(ReportBase):
                         ax_zoom = fig.add_subplot(gs[row, col])
                         ax_zoom, _ = plot_array_on_mesh(self.paradomain_polygons, array=data_array[i], ax=ax_zoom, cmap=cmap, norm=norm)
                         ax_zoom.set(xlim=xlim, ylim=ylim)
-                        plot_electrodes(self.elec_pos, ax=ax_zoom)
+                        plot_sensors(self.elec_pos, ax=ax_zoom)
 
                     if row == rows - 1:
                         ax.set_xlabel("X (m)", fontsize=8)

@@ -55,18 +55,19 @@ class ProjectPaths:
         self.ERT_MCM_2026E = self.onedrive_root / '000-Doctorat' / '13_MCM' / '04_ERT_MCM_2026E'
 
         # Site specific electrode position files
-        self.BB_ELECS_POS = self.DATA_DIR / 'ELECS_POS' / 'BB_ELECS_POS.csv'
-        self.MCM_MONO2M_ELECS_POS = self.DATA_DIR / 'ELECS_POS' / 'MCM_MONO2M_ELECS_POS.csv'
-        self.MCM_MONO1M_ELECS_POS = self.DATA_DIR / 'ELECS_POS' / 'MCM_MONO1M_ELECS_POS.csv'
-        self.MCM_MONO2M_ELECS_POS_TRUE = self.DATA_DIR / 'ELECS_POS' / 'MCM_MONO2M_ELECS_POS_TRUE.csv'
-        self.MCM_MONO1M_ELECS_POS_TRUE = self.DATA_DIR / 'ELECS_POS' / 'MCM_MONO1M_ELECS_POS_TRUE.csv'
-        self.MCM_GEO_ELECS_POS = self.DATA_DIR / 'ELECS_POS' / 'MCM_GEO_ELECS_POS.csv'
+        self.BB_ELECS_POS = self.DATA_DIR / 'SENSOR_POS' / 'BB_ELECS_POS.csv'
+        self.MCM_MONO2M_ELECS_POS = self.DATA_DIR / 'SENSOR_POS' / 'MCM_MONO2M_ELECS_POS.csv'
+        self.MCM_MONO1M_ELECS_POS = self.DATA_DIR / 'SENSOR_POS' / 'MCM_MONO1M_ELECS_POS.csv'
+        self.MCM_MONO2M_ELECS_POS_TRUE = self.DATA_DIR / 'SENSOR_POS' / 'MCM_MONO2M_ELECS_POS_TRUE.csv'
+        self.MCM_MONO1M_ELECS_POS_TRUE = self.DATA_DIR / 'SENSOR_POS' / 'MCM_MONO1M_ELECS_POS_TRUE.csv'
+        self.MCM_GEO_ELECS_POS = self.DATA_DIR / 'SENSOR_POS' / 'MCM_GEO_ELECS_POS.csv'
 
         # DAS dataset
         self.DAS_OUELLET_2024 = self.DATA_DIR / 'DAS' / 'Ouellet_2024'
 
         # MCM CR1000X data folder
-        self.MCM_CR1000X_DATA = self.DATA_DIR / 'MCM_CR1000X_Data'
+        self.MCM_CR1000X_DATA_1A = self.DATA_DIR / 'MCM_CR1000X_Data_1A'
+        self.MCM_CR1000X_DATA_1B = self.DATA_DIR / 'MCM_CR1000X_Data_1B'
         self.MCM_CR1000X_CS616_CAL_WSP = self.DATA_DIR / 'MCM_CR1000X_params' / 'CS616_calibration_WSP.json'
         self.MCM_CR1000X_CS616_CAL_OKANE = self.DATA_DIR / 'MCM_CR1000X_params' / 'CS616_calibration_Okane.json'
         self.MCM_CR1000X_1A_STATIONS_META = self.DATA_DIR / 'MCM_CR1000X_params' / '1A_Stations_metadata.json'

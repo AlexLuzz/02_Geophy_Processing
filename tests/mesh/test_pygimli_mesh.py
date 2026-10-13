@@ -1,5 +1,5 @@
 from src.mesh.pygimli_mesh_tools import build_grid_mesh, build_unstructured_mesh, safe_mesh_save
-from src.visualization.basic_plotting import plot_array_on_mesh, extract_polygons, plot_electrodes
+from src.visualization.basic_plotting import plot_array_on_mesh, extract_polygons, plot_sensors
 import matplotlib.pyplot as plt
 from src.loaders.ert_loading_tools import load_geometry
 from config.paths import ProjectPaths
@@ -27,7 +27,7 @@ def test_build_MCM_GEO():
     mesh = build_unstructured_mesh(bb_geom)
     mesh_polygons = extract_polygons(mesh)
     ax, coll = plot_array_on_mesh(mesh_polygons, edgecolor='black', alpha=0.2)
-    plot_electrodes(bb_geom, ax)
+    plot_sensors(bb_geom, ax)
     print(f"Mesh has {mesh.cellCount()} cells and {mesh.nodeCount()} nodes.")
 
     mesh_path = paths.OUTPUT_DIR / 'MCM_GEO_9247cells_V2.bms'
@@ -48,7 +48,7 @@ def test_build_MCM_M2m():
     mesh_path_str = str(paths.OUTPUT_DIR / 'MCM_MONO2M.bms').replace('\\', '/')
     safe_mesh_save(mesh, mesh_path_str)
     
-    plot_electrodes(geom_mono2m, ax)
+    plot_sensors(geom_mono2m, ax)
     ax, cb = pg.show(mesh, markers=True, showMesh=True)
     ax.plot(geom_mono2m['X'].values, geom_mono2m['Z'].values, "mx")
     print(f"Mesh has {mesh.cellCount()} cells and {mesh.nodeCount()} nodes.")
