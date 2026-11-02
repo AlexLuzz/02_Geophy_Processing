@@ -1,4 +1,3 @@
-
 import matplotlib.pyplot as plt
 import pandas as pd
 from matplotlib.colors import ListedColormap, BoundaryNorm

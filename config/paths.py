@@ -64,6 +64,8 @@ class ProjectPaths:
 
         # DAS dataset
         self.DAS_OUELLET_2024 = self.DATA_DIR / 'DAS' / 'Ouellet_2024'
+        self.MCM_DAS_TAP_TEST_ARPENTAGE = self.DATA_DIR / 'DAS' / 'MCM_tap_tests'
+        self.MCM_DAS_TAP_TEST_DATA = self.user_home / 'Downloads'
 
         # MCM CR1000X data folder
         self.MCM_CR1000X_DATA_1A = self.DATA_DIR / 'MCM_CR1000X_Data_1A'
