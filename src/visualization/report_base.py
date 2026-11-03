@@ -31,6 +31,8 @@ class ReportBase(ABC):
         height_ratios=None,
         width_ratios=None,
         landscape=False,
+        hspace=0.1,
+        wspace=0.05
     ):
         """Yields a gridspec page and automatically saves/closes it upon exit."""
 
@@ -44,8 +46,8 @@ class ReportBase(ABC):
             ncols=cols,
             height_ratios=height_ratios,
             width_ratios=width_ratios,
-            hspace=0.1,
-            wspace=0.05,
+            hspace=hspace,
+            wspace=wspace,
         )
 
         try:

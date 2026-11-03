@@ -73,8 +73,7 @@ if __name__ == "__main__":
 
     # Locate surveyed timestamp
     sample_idx = round(
-        (t_selected.timestamp() - t_datetime[0].timestamp()) * fs
-    )
+        (t_selected.timestamp() - t_datetime[0].timestamp()) * fs)
 
     # Extract 5-second window
     i0 = sample_idx - int(before * fs)

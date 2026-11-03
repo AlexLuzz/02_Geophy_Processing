@@ -27,6 +27,7 @@ if __name__ == "__main__":
         folder_path=paths.ACTIVE_PROJECT_DIR,
         survey_csv=csv_arpentage,
         file_list=das_files,
-        pages=["waterfall"]
+        pages=["waterfall"],
+        filename="DAS_TapTest_report_waterfall.pdf"
         )
     
